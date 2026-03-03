@@ -121,8 +121,76 @@ Verify the following:
 
 ## Solutions for task 1
 
-At the end of `firmware/src/main.cpp`:
+`firmware/src/main.cpp`:
 ```c++
+#include <Arduino.h>
+
+
+// Pin definitions
+const int buttonPin = 2;     // the number of the pushbutton pin
+const int ledPin =  3;      // the number of the LED pin
+
+// Status variables
+int buttonState = 0;         // variable for reading the pushbutton status
+int resetReceived = 0;       // variable for reading the reset status
+
+
+// Function prototypes
+void ledBlinkPatern(int pattern);
+void handShakeProtocol();
+
+
+// The setup function runs once when you press reset or power the board
+void setup() {
+    // initialize serial communication.
+    Serial.begin(9600);
+    // initialize the LED pin as an output.
+    pinMode(ledPin, OUTPUT);
+    // initialize the pushbutton pin as an input.
+    pinMode(buttonPin, INPUT);
+    // make sure the LED is on at the start
+    digitalWrite(ledPin, HIGH); 
+
+}
+
+// The loop function runs over and over again forever
+void loop() {
+
+    buttonState = digitalRead(buttonPin);
+
+    if (buttonState == HIGH && resetReceived == 0) {
+        Serial.println("Button pressed, waiting for reset...");
+        resetReceived = 1;
+        digitalWrite(ledPin, LOW);
+    }
+
+    if (resetReceived == 1) {
+        handShakeProtocol();
+        delay(1000); // Add a delay to prevent the loop from running too fast after the handshake protocol is complete
+    }
+
+
+}
+
+
+
+void ledBlinkPatern(int pattern) {
+    /*************************************************************
+    * This function is used to show the status of the LED. 
+    * 
+    * The pattern indicates how many times the LED will blink. 
+    * For example, if the pattern is 3, the LED will blink 3 times.
+    **************************************************************/
+    Serial.print("Status received:");
+    Serial.println(pattern);
+    for (int i = 0; i < pattern; i++) {
+        digitalWrite(ledPin, HIGH);
+        delay(500);
+        digitalWrite(ledPin, LOW);
+        delay(500);
+    }
+}
+
 void handShakeProtocol() {
     /*************************************************************
     * This function is used to implement the handshake protocol between pressing the button and the reset of the LED. 
@@ -130,12 +198,12 @@ void handShakeProtocol() {
     * When the button is pressed, the LED will turn on and stay on until the reset is received. 
     * Once the reset is received, the LED will turn off and the system will be ready for the next button press.
     * In task 1, the reset is triggered by waiting for an integer pattern to be sent through the serial monitor.
-    * In task 2, the reset is triggered by waiting for an API call to check that the device is connected to the internet.
+    * In task 2, the reset is triggered by connecting to an external server to check that the device is connected to the internet.
     * In task 3, the reset is triggered by waiting for an MQTT message that aknowledges that the device is connected to the MQTT broker.
     * In task 4, the reset is triggered by waiting for an MQTT message that sends a specific command to the device based on administrative rules defined in the cloud.
     **************************************************************/
 
-    // TASK 1 - HANDSHAKE PROTOCOL IS PERFORM THROUGH SERIAL COMMUNICATION
+    // TODO: YOUR CODE HERE
     if (Serial.available() > 0) {
         int pattern = Serial.parseInt(); // read the pattern from the serial monitor
         ledBlinkPatern(pattern); // blink the LED according to the received pattern
@@ -144,6 +212,5 @@ void handShakeProtocol() {
         digitalWrite(ledPin, HIGH);
         Serial.println("Reset received, LED is ON, waiting for button press...");
     }
-
 }
 ```
