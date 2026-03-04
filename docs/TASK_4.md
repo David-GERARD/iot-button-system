@@ -74,7 +74,7 @@ sequenceDiagram
 ![](images/task_4/mqtt_check.PNG)
 
 
-## 4.2 - Update the firware of the edge device to test its end-to-end capabilities
+## 4.2 - Update the firmware of the edge device to test the system end-to-end
 
 ```mermaid
 sequenceDiagram
