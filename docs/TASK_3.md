@@ -19,29 +19,30 @@ If need be, [create a new AWS account](https://docs.aws.amazon.com/iot/latest/de
 AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 certificates for authentication. We'll use a sketch to generate a Certificate Signing Request (CSR) on the board and then upload this CSR in the AWS console to create an X.509 certificate.
 
 1. Create a copy of `firmware/src/main.cpp` (such as `firmware/backup/main.cpp`).
-    > [!CAUTION]
-    > Do NOT store the copy in `firmware/src/`.
-2. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
+ > [!CAUTION]
+ > Do NOT store the copy in `firmware/src/`.
+
+3. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
     - `ArduinoECCX08`
-3. Replace the code in `firmware/src/main.cpp` with the code from [this GitHub Repository](https://github.com/arduino-libraries/ArduinoECCX08/blob/master/examples/Tools/ECCX08CSR/ECCX08CSR.ino). 
-    > [!WARNING]
-    > Don't upload the code to the Arduino yet!
+4. Replace the code in `firmware/src/main.cpp` with the code from [this GitHub Repository](https://github.com/arduino-libraries/ArduinoECCX08/blob/master/examples/Tools/ECCX08CSR/ECCX08CSR.ino). 
+> [!WARNING]
+> Don't upload the code to the Arduino yet!
 
-4. In the platformIO extension, click on `Build`. There should be an error message (there is a bug in the code which prevents compilation). Try and fix it so that `Build` doesn't return an error. If you can't, use the solution at the end of this document.
-    > [!TIP]
-    > Look into [function declaration VS definition](https://www.w3schools.com/cpp/cpp_functions.asp) in C++.
+5. In the platformIO extension, click on `Build`. There should be an error message (there is a bug in the code which prevents compilation). Try and fix it so that `Build` doesn't return an error. If you can't, use the solution at the end of this document.
+> [!TIP]
+> Look into [function declaration VS definition](https://www.w3schools.com/cpp/cpp_functions.asp) in C++.
 
-5.  Using the `Upload and Monitor` of the PatformIO extension, upload the code to the Arduino. the Serial Monitor will prompt you for information to include in the CSR. Most entries can be left blank and except:    
+6.  Using the `Upload and Monitor` of the PatformIO extension, upload the code to the Arduino. the Serial Monitor will prompt you for information to include in the CSR. Most entries can be left blank and except:    
     - The "Common Name", which you can put as `MyMKRWiFi1010`.
     - The slot number, try using `0`, if not available try `1`, `2`...
-    > [!CAUTION]
-    > This locking process is permanent and irreversible, but is needed to use the the crypto element - the configuration the sketch sets allows to use 5 private key slots with any Cloud provider (or server) and a CSR can be regenerated any time for each of the other four slots.
+> [!CAUTION]
+> This locking process is permanent and irreversible, but is needed to use the the crypto element - the configuration the sketch sets allows to use 5 private key slots with any Cloud provider (or server) and a CSR can be regenerated any time for each of the other four slots.
 
-    ![](images/task_3/crs_script.PNG)
+![](images/task_3/crs_script.PNG)
 
 5. Copy the generated CSR text including "-----BEGIN CERTIFICATE REQUEST-----" and "-----END CERTIFICATE REQUEST-----". and save it to a new `csr.txt` file.
-    > [!CAUTION]
-    > Make sure to **save this file**, but do not upload it to GitHub (it is bad practice, we use secrets instead).
+> [!CAUTION]
+> Make sure to **save this file**, but do not upload it to GitHub (it is bad practice, we use secrets instead).
 
 
 
@@ -92,8 +93,8 @@ AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 
     -----END CERTIFICATE-----
     )";
     ```
-    > [!WARNING]
-    > Make sure to leave no identation or empty lines in the certificate, it would prevent successful authentification and connection to the broker.
+> [!WARNING]
+> Make sure to leave no identation or empty lines in the certificate, it would prevent successful authentification and connection to the broker.
 2. Replace the content of `firmware/src/main.cpp` (which contains the CSR generation script) with the copy you made earlier (containing the Arduino code for your edge device).
 3. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
     - `ArduinoMqttClient`
