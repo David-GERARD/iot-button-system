@@ -1,12 +1,6 @@
 ![](images/ucl-logo.svg)
 # Task 4 - Create a system backend using AWS Lambda triggered by AWS IoT Core
 
-TODO: create and test lambda function `get_time`
-
-TODO: create and test lambda function `run_backend` that, when triggered, runs get_time, and publish its response on MQTT topic `arduino/inbound`
-
-TODO: create and test an IOT rule that triggers `run_backend` when receiving a message on MQTT topic `arduino/outgoing`
-
 ## 4.1 Create and test a cloud backend with AWS Lambda
 
 In this section, we will implement and test the backend of our application, whose event logic is described in the diagram bellow.
