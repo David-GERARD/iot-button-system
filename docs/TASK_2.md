@@ -37,7 +37,7 @@ It only means it joined the local network.
 Now we verify that the device can reach an external server on the Internet (`httpbin`) by using [`client.connect()`](https://docs.arduino.cc/libraries/wifinina/#Client%20Class)
 
 1. In `firmware/src/main.cpp`: 
-    - Create a `WiFiClient` object named `wifiClient` in the header.
+    - Create a `WiFiClient` object named `client` in the header.
     - Implement ` handShakeProtocol()` so that if the client sucessfully connects to `httpbin.org`, blink the LED 3 times, stop the client. It if doesn't connect, blink the LED 9 times. Finally, set `resetReceived` to 0, and set the LED to HIGH.
 4. Build the code and fix any errors that may arrise.
 5. Upload the code to the Arduino and open the Serial monitor to check that it connects to the Wifi, then press the button and check that it sucessfully connects to `httpbin`.
