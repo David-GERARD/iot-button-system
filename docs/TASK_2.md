@@ -20,7 +20,7 @@
 > [!TIP]
 > Use the [documentation](https://docs.arduino.cc/libraries/wifinina/) of the WiFiNINA librairy to find out how to implement the following items.
 
-1. In `firmware/platformio.ini`, make sure that `WiFiNINA` is in the (list of dependencies)[https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies].
+1. In `firmware/platformio.ini`, make sure that `WiFiNINA` is in the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
 2. In `firmware/src/main.cpp`'s header, import `secret.h`.
 3. In  `firmware/src/main.cpp`'s `setup()` function, use `Wifi.begin()` and `Wifi.status()` to connect to your wifi network and print in the serial when connection has been established (examples in the documentation).
 4. Build the code and fix any errors that may arrise.
