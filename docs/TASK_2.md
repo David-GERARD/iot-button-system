@@ -36,6 +36,41 @@ It only means it joined the local network.
 
 Now we verify that the device can reach an external server on the Internet (`httpbin`) by using [`client.connect()`](https://docs.arduino.cc/libraries/wifinina/#Client%20Class)
 
+```mermaid
+sequenceDiagram
+    box Edge Device
+        participant PB as Push Button
+        participant LED as LED
+        participant MCU as Arduino (Firmware)
+    end
+    box Internet
+        participant WIFI as WiFi Router
+        participant EXT as httpbin.org
+    end
+
+
+
+    MCU->>WIFI: WiFi.begin(SSID, PASSWORD)
+    WIFI-->>MCU: Connected (WL_CONNECTED)
+
+    PB->>MCU: Button pressed
+    MCU->>LED: Turn OFF
+
+    MCU->>EXT: client.connect("httpbin.org", 80)
+
+    alt Connection successful
+        EXT-->>MCU: Connection established
+        MCU->>LED: Blink 3 times
+        MCU->>EXT: client.stop()
+    else Connection failed
+        MCU->>LED: Blink 9 times
+    end
+
+    MCU->>LED: Turn ON
+   
+
+```
+
 1. In `firmware/src/main.cpp`: 
     - Create a `WiFiClient` object named `client` in the header.
     - Implement ` handShakeProtocol()` so that if the client sucessfully connects to `httpbin.org`, blink the LED 3 times, stop the client. It if doesn't connect, blink the LED 9 times. Finally, set `resetReceived` to 0, and set the LED to HIGH.
