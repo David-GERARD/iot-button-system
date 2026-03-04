@@ -27,14 +27,14 @@
 
 
 
-1. Navigate [project's GitHub repository home page](https://github.com/David-GERARD/iot-button-system).
+1. Go to the [project's GitHub repository home page](https://github.com/David-GERARD/iot-button-system).
 2. [Optional] if you find this tutorial useful, click on the Star button in the top right corner (much appreciated).
 3. Click on the Fork button in the top right corner.
-4. In `Choose an owner`, choose your personal GitHub account, leave `Copy the main branch only` ticked, and click on Create fork.
+4. In `Choose an owner`, choose your personal GitHub account, leave `Copy the main branch only` ticked, and click on `Create fork`.
 5. In **your fork**, click on `Code`->`HTTPS`, and copy the URL.
 > [!IMPORTANT]
 > Make sure the URL is `https://github.com/<your_username>/iot-button-system` and NOT `https://github.com/David-GERARD/iot-button-system`.
-6. In VSCode, open a terminal (I would recommend using a unix-style terminal such as bash, Git bash if you are on windows, zsh...), and navigate to where you want to store the project, and [clone the repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). 
+6. In VSCode, open a terminal (I would recommend using a unix-style terminal such as bash, Git bash if you are on windows, zsh...), navigate to where you want to store the project, and [clone the repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). 
 
 If you want to see the entire project in VSCode, click on `File`->`Open folder...` and select the cloned folder. It contains both the PlatformIO project with the Arduino Firmware (in `firmware/`), config files for AWS IOT Core (in `infra/`), and AWS Lambda functions coded in python (in `lambdas/`).
 
@@ -105,7 +105,7 @@ sequenceDiagram
 > Accordin to the Oxford English Dictionary, **firmware** is defined as *A permanent form of software built into certain kinds of computer*. In practice, this is what we call the code that program [microcontrollers](https://en.wikipedia.org/wiki/Microcontroller) or [microprocessors](https://en.wikipedia.org/wiki/Microprocessor).
 
 1. In VScode, click on the Explorer tab, and double click on the file `firmware/src/main.cpp` to open it.
-2. Read the code, and familiarise yourself with how it implements the event logic illustrated at the top of this document.
+2. Read the code, and familiarise yourself with how it implements the event logic illustrated above.
 3. In `main.cpp`, implement the function `handShakeProtocol()` so that when triggered:
     - It waits for an integer from the Serial monitor.
     - When received, it runs the function `ledBlinkPatern` using the integer as its argument.
