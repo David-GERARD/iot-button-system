@@ -94,6 +94,9 @@ AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 
     )";
     ```
 > [!WARNING]
+> This is the certificate you **downloaded** from AWS, not the CSR generated with the `ECCX08` script.
+
+> [!WARNING]
 > Make sure to leave no identation or empty lines in the certificate, it would prevent successful authentification and connection to the broker.
 2. Replace the content of `firmware/src/main.cpp` (which contains the CSR generation script) with the copy you made earlier (containing the Arduino code for your edge device).
 3. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
