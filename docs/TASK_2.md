@@ -65,7 +65,6 @@ framework = arduino
 monitor_speed = 9600
 lib_deps = 
     WiFiNINA
-    ArduinoHttpClient
 ```
 
 `firmware/src/main.cpp`
