@@ -64,6 +64,40 @@ AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 
 
 
 ## 3.2 - Update the firware of the edge device to test connectivity to AWS IoT Core
+```mermaid
+sequenceDiagram
+    box Edge Device
+        participant PB as Push Button
+        participant LED as LED
+        participant MCU as Arduino (Firmware)
+        
+    end
+    participant WIFI as WiFi Router
+    box AWS Cloud
+        participant IOT as AWS IoT Core (MQTT Broker)
+    end
+
+  
+
+    MCU->>WIFI: WiFi.begin(SSID, PASSWORD)
+    WIFI-->>MCU: Connected
+
+
+    PB->>MCU: Button pressed
+    MCU->>LED: Turn OFF
+    MCU->>IOT: Attempt MQTT TLS connection\nport 8883
+
+    alt Connection successful
+        MCU->>IOT: MQTT CONNECT (TLS + X.509)
+        IOT-->>MCU: CONNACK
+        MCU->>IOT: Publish "hello..."\nTopic: arduino/outgoing
+        MCU->>LED: Blink 3 times
+    else Connection failed
+        MCU->>LED: Blink 9 times
+    end
+
+    MCU->>LED: Turn ON
+```
 
 1. In the file `firmware/include/secrets.h` you created in task 2, paste the following:
     ```cpp
