@@ -20,6 +20,39 @@ At each stage, we introduce only one new component and **test** that it works in
 
 By the end, you will have a working IoT pipeline from a physical button press to cloud-side logic and back.
 
+```mermaid
+sequenceDiagram
+    box Edge Device
+        participant PB as Push Button
+        participant L as LED
+        participant A as Arduino
+    end
+
+    box AWS Cloud
+        participant I as AWS IoT Core
+        participant R as Lambda: run_backend
+        participant T as Lambda: get_time
+    end
+
+    PB->>A: Button pressed
+    A->>L: LED off
+    
+    A->>I: MQTT Publish\nTopic: arduino/outgoing\nPayload: { timezone_offset }
+    
+    I->>R: IoT Rule triggers run_backend\n(event payload forwarded)
+    
+    R->>T: Call get_time(timezone_offset)
+    T-->>R: Return { minutes }
+    
+    R->>I: MQTT Publish\nTopic: arduino/inbound\nPayload: { minutes }
+    
+    I->>A: Deliver MQTT message\nTopic: arduino/inbound\n{ minutes }
+    
+    A->>L: Blink LED N times\n(N = current minute)
+
+    A->>L: LED on
+```
+
 Take the tasks in order. Do not move on until the current step behaves exactly as expected. That discipline is what makes larger systems manageable.
 
 ### 🔧Task 1 - Building and Testing the edge device
