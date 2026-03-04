@@ -59,46 +59,25 @@ If you want to see the entire project in VSCode, click on `File`->`Open folder..
 Event logic implemented in task 1:
 ```mermaid
 sequenceDiagram
-    participant User 
-    box Arduino
-    participant Button
-    participant LED
-    participant Controller
+    box Edge Device
+        participant PB as Push Button
+        participant LED as LED
+        participant MCU as Arduino (Firmware)
+        
     end
-    box Computer
-    participant Serial_Monitor
-    end
-    User ->> Controller: Boots
-    loop setup
-    activate Controller
-    Controller ->> Button:pinMode(buttonPin, INPUT)
-    Controller ->> LED: pinMode(ledPin, OUTPUT)
-    Controller ->> Serial_Monitor: Serial.begin()
-    activate Serial_Monitor
-    Controller ->> LED: digitalWrite(ledPin, HIGH)
-    activate LED
-    end
-    loop main
-    User -->> Button: Presses button
-    activate Button
-    Button ->> Controller: set resetReceived to 1
-    deactivate Button
-    Controller ->> LED: digitalWrite(ledPin, LOW)
-    deactivate LED
-    critical handShakeProtocol()
-    User -->> Serial_Monitor: Enters the pattern integer
-    Serial_Monitor ->> Controller: Returns the pattern interger
-    Controller ->> LED : ledBlinkPatern(int pattern)
-    activate LED
-    LED --> Controller : set resetReceived to 0
-    deactivate LED
-    Controller ->> LED : digitalWrite(ledPin, HIGH)
-    end
-    activate LED
-    end
-    deactivate LED
-    deactivate Serial_Monitor
-    deactivate Controller
+    participant SM as Serial Monitor
+
+
+    PB->>MCU: Button pressed
+    MCU->>LED: Turn OFF
+    MCU->>SM: Print "Waiting for reset..."
+   
+    SM->>MCU: Send integer (e.g. 3)
+
+    MCU->>LED: Blink N times\n(N = received integer)
+
+    MCU->>LED: Turn ON
+    MCU->>SM: Print "Reset received"
 ```
 
 > [!TIP]
