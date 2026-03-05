@@ -89,7 +89,7 @@ sequenceDiagram
     - It waits for an integer from the Serial monitor.
     - When received, it runs the function `ledBlinkPatern` using the integer as its argument.
     - When `ledBlinkPatern` is done running, it sets `resetReceived` to 0 and it turns the LED back on.
-4. In the PlateformIO tab, in `general`, click on `Build`. Check the temrinal the Arduino into your computer.
+4. In the PlateformIO tab, in `general`, click on `Build`. Check the terminal the Arduino into your computer.
 5. In the PlateformIO tab, in `general`, click on `Upload and Monitor`. 
 
 ## 1.3 - Test the edge device
