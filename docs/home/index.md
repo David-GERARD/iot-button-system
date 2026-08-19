@@ -8,6 +8,8 @@ Welcome to the course website for **ELEC0033** and **ELEC0152**!
 
 ### Part 1 — IoT fundamentals + Mini Project
 
+An IoT crash course to get you familiar with all the tools and workflows you'll need to start working on the group project.
+
 ```mermaid
 timeline
     section Part 1 — IoT Fundamentals + Mini Project
@@ -28,6 +30,8 @@ Each of these three sessions is made up of a lecture followed by a guided tutori
 
 
 ### Part 2 — Tutorials + Group Project
+
+Lectures covering additional material important to designing an IoT system, combined with dedicated time to work on your group project.
 
 ```mermaid
 timeline
