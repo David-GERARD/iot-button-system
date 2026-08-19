@@ -32,10 +32,18 @@ Each of these three sessions is made up of a lecture followed by a guided tutori
 ```mermaid
 timeline
     section Part 2 — Tutorials + Group Project
-        TBD : To be announced
+        Session 4 : Project brief : Business case : Team building
+        Session 5 : Exploratory Data Analysis : Ethics
+        Session 6 : Q&A with a cloud engineer
+        Session 7 : TBD
 ```
 
-TBD
+- **Session 4 — Project brief, Business case, Team building**
+- **Session 5 — Exploratory Data Analysis, Ethics**
+- **Session 6 — Q&A with a cloud engineer**
+- **Session 7 — TBD**
+
+More details on this part of the course, and the [Group Project](group-project.md) itself, will be added here in due course.
 
 ---
 
