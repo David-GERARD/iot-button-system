@@ -1,83 +1,88 @@
-![](images/ucl-logo.svg)
-# Task 3 - Connecting the edge device to AWS IOT Core
+# Mini Project Task 3 — Connecting the Edge Device to AWS IoT Core
 
-## 3.0 - Setup the AWS account
+!!! note
+    This task assumes you already have an AWS account set up — see [Getting Started](../getting-started.md#6-set-up-your-aws-account) if you haven't done that yet.
 
-> [!IMPORTANT]
-> The free tier of AWS lasts 6 months, and an email address can only be used once to create an AWS account. If you have an AWS account but the free tier expired, create a new one using a different address (you can create a free gmail account if need be).
+## 3.0 — Create a branch for this task
 
-> [!TIP]
-> If you're working in a group, it is best to use a single account, and have its owner [create IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) for each team members. Make sure to grant these IAM users the right permissions to permorm their required tasks.
+1. On GitHub, in **your fork**, go to the branches page and click `New branch`. Name it `task-3`, create it from `main`, and click `Create new branch`.
+2. Open your cloned repository in VSCode.
+3. In a terminal, run `git fetch` to make VSCode aware of the new branch.
+4. Check out the new branch:
+    ```bash
+    git checkout task-3
+    ```
 
-If need be, [create a new AWS account](https://docs.aws.amazon.com/iot/latest/developerguide/setting-up.html) and IAM users for each team members (and yourself, it is good practice to only use the root access for permission management).
+All the work for this task should be committed to the `task-3` branch.
 
+## 3.1 — Configure connectivity to AWS IoT Core
 
-## 3.1 - Configure connectivity to AWS IoT Core 
-
-### 3.1.1 - Create a CSR for a private key generated in an ECC508/ECC608 crypto chip slot
+### 3.1.1 — Create a CSR for a private key generated in an ECC508/ECC608 crypto chip slot
 
 AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 certificates for authentication. We'll use a sketch to generate a Certificate Signing Request (CSR) on the board and then upload this CSR in the AWS console to create an X.509 certificate.
 
 1. Create a copy of `firmware/src/main.cpp` (such as `firmware/backup/main.cpp`).
- > [!CAUTION]
- > Do NOT store the copy in `firmware/src/`.
 
-3. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
+    !!! danger
+        Do NOT store the copy in `firmware/src/`.
+
+2. In `firmware/platformio.ini`, make sure that the following is added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies):
     - `ArduinoECCX08`
-4. Replace the code in `firmware/src/main.cpp` with the code from [this GitHub Repository](https://github.com/arduino-libraries/ArduinoECCX08/blob/master/examples/Tools/ECCX08CSR/ECCX08CSR.ino). 
-> [!WARNING]
-> Don't upload the code to the Arduino yet!
+3. Replace the code in `firmware/src/main.cpp` with the code from [this GitHub repository](https://github.com/arduino-libraries/ArduinoECCX08/blob/master/examples/Tools/ECCX08CSR/ECCX08CSR.ino).
 
-5. In the platformIO extension, click on `Build`. There should be an error message (there is a bug in the code which prevents compilation). Try and fix it so that `Build` doesn't return an error. If you can't, use the solution at the end of this document.
-> [!TIP]
-> Look into [function declaration VS definition](https://www.w3schools.com/cpp/cpp_functions.asp) in C++.
+    !!! warning
+        Don't upload the code to the Arduino yet!
 
-6.  Using the `Upload and Monitor` of the PatformIO extension, upload the code to the Arduino. the Serial Monitor will prompt you for information to include in the CSR. Most entries can be left blank and except:    
-    - The "Common Name", which you can put as `MyMKRWiFi1010`.
-    - The slot number, try using `0`, if not available try `1`, `2`...
-> [!CAUTION]
-> This locking process is permanent and irreversible, but is needed to use the the crypto element - the configuration the sketch sets allows to use 5 private key slots with any Cloud provider (or server) and a CSR can be regenerated any time for each of the other four slots.
+4. In the PlatformIO extension, click on `Build`. There should be an error message (there is a bug in the code which prevents compilation). Try and fix it so that `Build` doesn't return an error. If you can't, use the solution at the end of this document.
 
-![](images/task_3/crs_script.PNG)
+    !!! tip
+        Look into [function declaration vs. definition](https://www.w3schools.com/cpp/cpp_functions.asp) in C++.
 
-5. Copy the generated CSR text including "-----BEGIN CERTIFICATE REQUEST-----" and "-----END CERTIFICATE REQUEST-----". and save it to a new `csr.txt` file.
-> [!CAUTION]
-> Make sure to **save this file**, but do not upload it to GitHub (it is bad practice, we use secrets instead).
+5. Using `Upload and Monitor` in the PlatformIO extension, upload the code to the Arduino. The Serial Monitor will prompt you for information to include in the CSR. Most entries can be left blank, except:
+    - The "Common Name", which you can set to `MyMKRWiFi1010`.
+    - The slot number: try `0`, if not available try `1`, `2`...
 
+    !!! danger
+        This locking process is permanent and irreversible, but is needed to use the crypto element — the configuration the sketch sets allows you to use 5 private key slots with any cloud provider (or server), and a CSR can be regenerated at any time for each of the other four slots.
 
+    ![CSR generation script output](../images/task_3/crs_script.PNG)
 
+6. Copy the generated CSR text including `-----BEGIN CERTIFICATE REQUEST-----` and `-----END CERTIFICATE REQUEST-----`, and save it to a new `csr.txt` file.
 
-### 3.1.2 - Create a thing in AWS IoT
+    !!! danger
+        Make sure to **save this file**, but do not upload it to GitHub (it is bad practice — we use secrets instead).
 
-1. Log into your AWS account, and using the searchbar, open AWS IoT Core.
-    ![](images/task_3/console_iot_core.PNG)
-2. In the left menu bar, click on `Manage` -> `All devices` -> `Things`.
-3. Click on `Create things`, choose `create single thing`, choose a name for your thing (such as `MyMKRWiFi1010`), leave all other fields as default, and click on next.
+### 3.1.2 — Create a thing in AWS IoT
+
+1. Log into your AWS account, and using the search bar, open AWS IoT Core.
+    ![AWS IoT Core console](../images/task_3/console_iot_core.PNG)
+2. In the left menu bar, click on `Manage` → `All devices` → `Things`.
+3. Click on `Create things`, choose `Create single thing`, choose a name for your thing (such as `MyMKRWiFi1010`), leave all other fields as default, and click on next.
 4. Select `Upload CSR`, and upload the `csr.txt` file you created.
-5. Click on `Create policy` (it opens a new tab), name it ` FirstPolicy`, then click on `JSON`, and paste the content of `infra/policies/first_policy.json`. Click on `Create`.
+5. Click on `Create policy` (it opens a new tab), name it `FirstPolicy`, then click on `JSON`, and paste the content of `infra/policies/first_policy.json`. Click on `Create`.
 6. Going back to the Thing tab, you should now see your policy in the list of policies. Tick the box to select it, and click on `Create thing`.
-7. In the left menu bar, click on `Manage` -> `Security` -> `Certificates`. Click on the certificate you created, then click on:
-    - `Actions`->`Activate`
-    - `Actions`->`Download` (save this file)
-8. In the left menu bar, click on `Test`->`MQTT test client`. Click on the dropdown menu `Connection details`, and copy the AWS IoT broker Endpoint URL.
-    ![](images/task_3/mqtt_endpoint_url.PNG)
+7. In the left menu bar, click on `Manage` → `Security` → `Certificates`. Click on the certificate you created, then click on:
+    - `Actions` → `Activate`
+    - `Actions` → `Download` (save this file)
+8. In the left menu bar, click on `Test` → `MQTT test client`. Click on the dropdown menu `Connection details`, and copy the AWS IoT broker Endpoint URL.
+    ![MQTT broker endpoint URL](../images/task_3/mqtt_endpoint_url.PNG)
 
+## 3.2 — Update the firmware of the edge device to test connectivity to AWS IoT Core
 
-## 3.2 - Update the firware of the edge device to test connectivity to AWS IoT Core
 ```mermaid
 sequenceDiagram
     box Edge Device
         participant PB as Push Button
         participant LED as LED
         participant MCU as Arduino (Firmware)
-        
+
     end
     participant WIFI as WiFi Router
     box AWS Cloud
         participant IOT as AWS IoT Core (MQTT Broker)
     end
 
-  
+
 
     MCU->>WIFI: WiFi.begin(SSID, PASSWORD)
     WIFI-->>MCU: Connected
@@ -99,11 +104,13 @@ sequenceDiagram
     MCU->>LED: Turn ON
 ```
 
-1. In the file `firmware/include/secrets.h` you created in task 2, paste the following:
+1. In the file `firmware/include/secrets.h` you created in Task 2, paste the following:
+
     ```cpp
     // Fill in the url of your AWS IoT broker copied in task 3.1.2.8
     #define SECRET_BROKER "xxxxxxxxxxxxxx.iot.xx-xxxx-x.amazonaws.com"
     ```
+
     ```cpp
     // Fill in with the content of the file downloaded from AWS in 3.1.2.7
     const char SECRET_CERTIFICATE[] = R"(
@@ -127,24 +134,35 @@ sequenceDiagram
     -----END CERTIFICATE-----
     )";
     ```
-> [!WARNING]
-> This is the certificate you **downloaded** from AWS, not the CSR generated with the `ECCX08` script.
 
-> [!WARNING]
-> Make sure to leave no identation or empty lines in the certificate, it would prevent successful authentification and connection to the broker.
+    !!! warning
+        This is the certificate you **downloaded** from AWS, not the CSR generated with the `ECCX08` script.
+
+    !!! warning
+        Make sure to leave no indentation or empty lines in the certificate — it would prevent successful authentication and connection to the broker.
+
 2. Replace the content of `firmware/src/main.cpp` (which contains the CSR generation script) with the copy you made earlier (containing the Arduino code for your edge device).
-3. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
+3. In `firmware/platformio.ini`, make sure that the following are added to the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies):
     - `ArduinoMqttClient`
     - `ArduinoBearSSL`
-4. Using this [example](https://docs.arduino.cc/tutorials/mkr-wifi-1010/securely-connecting-an-arduino-mkr-wifi-1010-to-aws-iot-core/#complete-sketch), modify the edge device firmware so that when the button is pressed, if the Arduino successfully connects to the MQTT broker, it sends a message on the topic `arduino/outgoin`, and makes the LED blink 3 times. Make the LED blink 9 times if the connection is unsuccessful.
-5. In AWS IoT core, in the left menu bar, click on `Test`->`MQTT test client`. Subsrcibe to the topic `arduino/outgoing`.
-6. Using the platformIO extension, build the code to check for error, and upload to the edge device with update and monitor. Veryfy that:
-    - The LED behaves as expected and blinks 3 times to indicate successfull connection.
+4. Using this [example](https://docs.arduino.cc/tutorials/mkr-wifi-1010/securely-connecting-an-arduino-mkr-wifi-1010-to-aws-iot-core/#complete-sketch), modify the edge device firmware so that when the button is pressed, if the Arduino successfully connects to the MQTT broker, it sends a message on the topic `arduino/outgoing`, and makes the LED blink 3 times. Make the LED blink 9 times if the connection is unsuccessful.
+5. In AWS IoT Core, in the left menu bar, click on `Test` → `MQTT test client`. Subscribe to the topic `arduino/outgoing`.
+6. Using the PlatformIO extension, build the code to check for errors, and upload to the edge device with `Upload and Monitor`. Verify that:
+    - The LED behaves as expected and blinks 3 times to indicate a successful connection.
     - You see a message appear in the MQTT test client every time you press the button.
 
+## 3.3 — Submit the task for review
 
-## Solutions for task 3
+1. Commit and push your changes to the `task-3` branch.
+2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-3`, then click `Create pull request`.
+3. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (in the pull request page, click the gear icon next to `Reviewers`).
+4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
+5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v3.0.0`, and click `Create new tag: v3.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
+
+## Solutions for Task 3
+
 `firmware/platformio.ini`
+
 ```ini
 ; PlatformIO Project Configuration File
 ;
@@ -161,7 +179,7 @@ platform = atmelsam
 board = mkrwifi1010
 framework = arduino
 monitor_speed = 9600
-lib_deps = 
+lib_deps =
     WiFiNINA
     ArduinoECCX08
     ArduinoMqttClient
@@ -170,6 +188,7 @@ lib_deps =
 ```
 
 `firmware/src/main.cpp` (CSR generation script with fix)
+
 ```cpp
 /*
 ArduinoECCX08 - CSR (Certificate Signing Request)
@@ -328,6 +347,7 @@ return line;
 ```
 
 `firmware/include/secrets.h`
+
 ```cpp
 #define WIFI_SSID "xxxxxx"
 #define WIFI_PASSWORD "xxxxx"
@@ -358,6 +378,7 @@ xxxxxxxxxxx=
 ```
 
 `firmware/src/main.cpp` (edge device code in task 3)
+
 ```cpp
 #include <Arduino.h>
 #include <WiFiNINA.h>
@@ -404,8 +425,8 @@ void setup() {
     // initialize the pushbutton pin as an input.
     pinMode(buttonPin, INPUT);
     // make sure the LED is on at the start
-    digitalWrite(ledPin, HIGH); 
-    
+    digitalWrite(ledPin, HIGH);
+
     delay(5000); // Wait for 5 second to ensure the LED is on before connecting to WiFi
     Serial.println("Connecting to WiFi...");
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -462,9 +483,9 @@ void loop() {
 
 void ledBlinkPatern(int pattern) {
     /*************************************************************
-    * This function is used to show the status of the LED. 
-    * 
-    * The pattern indicates how many times the LED will blink. 
+    * This function is used to show the status of the LED.
+    *
+    * The pattern indicates how many times the LED will blink.
     * For example, if the pattern is 3, the LED will blink 3 times.
     **************************************************************/
     Serial.print("Status received:");
@@ -479,9 +500,9 @@ void ledBlinkPatern(int pattern) {
 
 void handShakeProtocol() {
     /*************************************************************
-    * This function is used to implement the handshake protocol between pressing the button and the reset of the LED. 
-    * 
-    * When the button is pressed, the LED will turn on and stay on until the reset is received. 
+    * This function is used to implement the handshake protocol between pressing the button and the reset of the LED.
+    *
+    * When the button is pressed, the LED will turn on and stay on until the reset is received.
     * Once the reset is received, the LED will turn off and the system will be ready for the next button press.
     * In task 1, the reset is triggered by waiting for an integer pattern to be sent through the serial monitor.
     * In task 2, the reset is triggered by waiting for an API call to check that the device is connected to the internet.
@@ -515,7 +536,7 @@ void handShakeProtocol() {
 }
 
 unsigned long getTime() {
-  // get the current time from the WiFi module  
+  // get the current time from the WiFi module
   return WiFi.getTime();
 }
 

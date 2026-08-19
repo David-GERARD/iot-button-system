@@ -1,10 +1,21 @@
-![](images/ucl-logo.svg)
-# Task 2 - Connecting the edge device to the internet
+# Mini Project Task 2 — Connecting the Edge Device to the Internet
 
-## 2.1 - Create a secret file to store your wifi network name and password
+## 2.0 — Create a branch for this task
 
-> [!NOTE]
-> Sensitive information (WiFi passwords, API keys, AWS certificates, private keys) should never be stored directly in source code. Keeping these "secrets" in separate, non-tracked files prevents them from being accidentally committed to GitHub, shared publicly, or leaked to others. It also makes the project safer to distribute, easier to reuse across different environments, and simpler to rotate or update credentials without modifying the code itself.
+1. On GitHub, in **your fork**, go to the branches page and click `New branch`. Name it `task-2`, create it from `main`, and click `Create new branch`.
+2. Open your cloned repository in VSCode.
+3. In a terminal, run `git fetch` to make VSCode aware of the new branch.
+4. Check out the new branch:
+    ```bash
+    git checkout task-2
+    ```
+
+All the work for this task should be committed to the `task-2` branch.
+
+## 2.1 — Create a secret file to store your WiFi network name and password
+
+!!! note
+    Sensitive information (WiFi passwords, API keys, AWS certificates, private keys) should never be stored directly in source code. Keeping these "secrets" in separate, non-tracked files prevents them from being accidentally committed to GitHub, shared publicly, or leaked to others. It also makes the project safer to distribute, easier to reuse across different environments, and simpler to rotate or update credentials without modifying the code itself.
 
 1. In `firmware/include/`, create a `secret.h` file.
 2. In this new file, add the following (replacing the placeholders):
@@ -13,28 +24,27 @@
     #define WIFI_SSID "your_wifi_name"
     #define WIFI_PASSWORD "your_wifi_password"
     ```
+
 3. Save the file.
 
-## 2.2 - Update the firmware to connect to your WiFi router
+## 2.2 — Update the firmware to connect to your WiFi router
 
-> [!TIP]
-> Use the [documentation](https://docs.arduino.cc/libraries/wifinina/) of the WiFiNINA librairy to find out how to implement the following items.
+!!! tip
+    Use the [documentation](https://docs.arduino.cc/libraries/wifinina/) of the WiFiNINA library to find out how to implement the following items.
 
 1. In `firmware/platformio.ini`, make sure that `WiFiNINA` is in the [list of dependencies](https://docs.platformio.org/en/latest/librarymanager/dependencies.html#declaring-dependencies).
 2. In `firmware/src/main.cpp`'s header, import `secret.h`.
-3. In  `firmware/src/main.cpp`'s `setup()` function, use `Wifi.begin()` and `Wifi.status()` to connect to your wifi network and print in the serial when connection has been established (examples in the documentation).
-4. Build the code and fix any errors that may arrise.
-5. Upload the code to the Arduino and open the Serial monitor to check that it connects to the Wifi.
+3. In `firmware/src/main.cpp`'s `setup()` function, use `WiFi.begin()` and `WiFi.status()` to connect to your WiFi network and print in the serial monitor when connection has been established (examples in the documentation).
+4. Build the code and fix any errors that may arise.
+5. Upload the code to the Arduino and open the Serial monitor to check that it connects to the WiFi.
 
-
-## 2.3 – Upload the firmware and test Internet connectivity
+## 2.3 — Upload the firmware and test Internet connectivity
 
 At this stage, your board connects to your WiFi router.
 
-That **does not automatically mean** it has Internet access.
-It only means it joined the local network.
+That **does not automatically mean** it has Internet access. It only means it joined the local network.
 
-Now we verify that the device can reach an external server on the Internet (`httpbin`) by using [`client.connect()`](https://docs.arduino.cc/libraries/wifinina/#Client%20Class)
+Now we verify that the device can reach an external server on the Internet (`httpbin.org`) by using [`client.connect()`](https://docs.arduino.cc/libraries/wifinina/#Client%20Class).
 
 ```mermaid
 sequenceDiagram
@@ -67,21 +77,26 @@ sequenceDiagram
     end
 
     MCU->>LED: Turn ON
-   
-
 ```
 
-1. In `firmware/src/main.cpp`: 
+1. In `firmware/src/main.cpp`:
     - Create a `WiFiClient` object named `client` in the header.
-    - Implement ` handShakeProtocol()` so that if the client sucessfully connects to `httpbin.org`, blink the LED 3 times, stop the client. It if doesn't connect, blink the LED 9 times. Finally, set `resetReceived` to 0, and set the LED to HIGH.
-4. Build the code and fix any errors that may arrise.
-5. Upload the code to the Arduino and open the Serial monitor to check that it connects to the Wifi, then press the button and check that it sucessfully connects to `httpbin`.
+    - Implement `handShakeProtocol()` so that if the client successfully connects to `httpbin.org`, blink the LED 3 times, then stop the client. If it doesn't connect, blink the LED 9 times. Finally, set `resetReceived` to 0, and set the LED to HIGH.
+2. Build the code and fix any errors that may arise.
+3. Upload the code to the Arduino and open the Serial monitor to check that it connects to the WiFi, then press the button and check that it successfully connects to `httpbin.org`.
 
+## 2.4 — Submit the task for review
 
-## Solutions for task 2
+1. Commit and push your changes to the `task-2` branch.
+2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-2`, then click `Create pull request`.
+3. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (in the pull request page, click the gear icon next to `Reviewers`).
+4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
+5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v2.0.0`, and click `Create new tag: v2.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
+## Solutions for Task 2
 
-`firmware/include/platformio.ini`
+`firmware/platformio.ini`
+
 ```ini
 ; PlatformIO Project Configuration File
 ;
@@ -98,11 +113,12 @@ platform = atmelsam
 board = mkrwifi1010
 framework = arduino
 monitor_speed = 9600
-lib_deps = 
+lib_deps =
     WiFiNINA
 ```
 
 `firmware/src/main.cpp`
+
 ```c++
 #include <Arduino.h>
 #include <WiFiNINA.h>
@@ -134,8 +150,8 @@ void setup() {
     // initialize the pushbutton pin as an input.
     pinMode(buttonPin, INPUT);
     // make sure the LED is on at the start
-    digitalWrite(ledPin, HIGH); 
-    
+    digitalWrite(ledPin, HIGH);
+
     delay(5000); // Wait for 5 second to ensure the LED is on before connecting to WiFi
     Serial.println("Connecting to WiFi...");
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -170,9 +186,9 @@ void loop() {
 
 void ledBlinkPatern(int pattern) {
     /*************************************************************
-    * This function is used to show the status of the LED. 
-    * 
-    * The pattern indicates how many times the LED will blink. 
+    * This function is used to show the status of the LED.
+    *
+    * The pattern indicates how many times the LED will blink.
     * For example, if the pattern is 3, the LED will blink 3 times.
     **************************************************************/
     Serial.print("Status received:");
@@ -187,9 +203,9 @@ void ledBlinkPatern(int pattern) {
 
 void handShakeProtocol() {
     /*************************************************************
-    * This function is used to implement the handshake protocol between pressing the button and the reset of the LED. 
-    * 
-    * When the button is pressed, the LED will turn on and stay on until the reset is received. 
+    * This function is used to implement the handshake protocol between pressing the button and the reset of the LED.
+    *
+    * When the button is pressed, the LED will turn on and stay on until the reset is received.
     * Once the reset is received, the LED will turn off and the system will be ready for the next button press.
     * In task 1, the reset is triggered by waiting for an integer pattern to be sent through the serial monitor.
     * In task 2, the reset is triggered by connecting to an external server to check that the device is connected to the internet.

@@ -94,7 +94,7 @@ sequenceDiagram
 ```
 Button, LED, firmware logic, and a simple serial handshake. No Internet, no cloud.
 
-*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/TASK_1.md) to read the instructions for task 1.*
+*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/session1/task1.md) to read the instructions for task 1.*
 
 ### 📶Task 2 - Connecting the edge device to the internet
 ```mermaid
@@ -133,7 +133,7 @@ sequenceDiagram
 ```
 The device connects to WiFi and performs a basic external request. We confirm networking works before touching AWS.
 
-*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/TASK_2.md) to read the instructions for task 2.*
+*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/session2/task2.md) to read the instructions for task 2.*
 
 ### ☁️Task 3 - Connecting the edge device to AWS IOT Core
 ```mermaid
@@ -172,7 +172,7 @@ sequenceDiagram
 ```
 Secure MQTT communication with the cloud. We verify the device can connect and exchange messages.
 
-*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/TASK_3.md) to read the instructions for task 3.*
+*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/session2/task3.md) to read the instructions for task 3.*
 
 ### 🧠Task 4 - Create a system backend using AWS Lambda triggered by AWS IoT Core
 ```mermaid
@@ -209,7 +209,7 @@ sequenceDiagram
 ```
 AWS IoT rules and Lambda functions complete the end-to-end system.
 
-*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/TASK_4.md) to read the instructions for task 4.*
+*👉 Click [here](https://github.com/David-GERARD/iot-button-system/blob/main/docs/session3/task4.md) to read the instructions for task 4.*
 
 ## Repository structure
 ```bash
@@ -224,3 +224,16 @@ iot-button-system/
 - Arduino MKR WIFI 10101.
 - LED kit.
 - Push button kit.
+
+## Documentation site
+
+The content of `docs/` is also published as a browsable [MkDocs](https://www.mkdocs.org/) site using the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme. Dependencies are managed with [uv](https://docs.astral.sh/uv/).
+
+To run it locally:
+
+```bash
+uv sync
+uv run mkdocs serve
+```
+
+Then open [http://127.0.0.1:8000](http://127.0.0.1:8000).
