@@ -1,2 +1,8 @@
 .DS_Store
 secrets.h
+
+# uv / Python
+.venv/
+
+# MkDocs build output
+site/

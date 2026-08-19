@@ -1,0 +1,9 @@
+[project]
+name = "iot-button-system"
+version = "0.1.0"
+description = "Documentation site for the IoT button system tutorial"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mkdocs-material>=9.5",
+]
