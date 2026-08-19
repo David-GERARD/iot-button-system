@@ -1,8 +1,8 @@
-# Setup instructions
+# 🛠️ Setup instructions
 
 Follow these steps once, before starting Session 1.
 
-## 1. Set up your IDE
+## 1. 💻 Set up your IDE
 
 !!! note
     In this tutorial, we use the PlatformIO extension of VSCode to compile code and upload it to the Arduino. You can also use the Arduino IDE, but you will have to troubleshoot issues on your own.
@@ -14,7 +14,7 @@ Follow these steps once, before starting Session 1.
 2. In VSCode, open the Extensions tab (in the left toolbar), search and install the [PlatformIO IDE extension](https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide).
 3. Restart VSCode.
 
-## 2. Fork and clone the mini project
+## 2. 🍴 Fork and clone the mini project
 
 !!! note
     This section requires minimal experience with git and GitHub. If you're not familiar with these VERY important software development tools, please check the following links before proceeding with this section.
@@ -39,7 +39,7 @@ Follow these steps once, before starting Session 1.
 
 If you want to see the entire project in VSCode, click on `File` → `Open folder...` and select the cloned folder. It contains both the PlatformIO project with the Arduino Firmware (in `firmware/`), config files for AWS IoT Core (in `infra/`), and AWS Lambda functions coded in Python (in `lambdas/`).
 
-## 3. Add a course educator as a collaborator
+## 3. 🤝 Add a course educator as a collaborator
 
 !!! note
     Each task you complete will be submitted as a pull request and reviewed by one of the course educators (see the branch/pull request workflow described at the start of every task). For them to be able to review your pull requests, they need to be added as a collaborator on **your fork**.
@@ -49,12 +49,12 @@ If you want to see the entire project in VSCode, click on `File` → `Open folde
 3. Select the `Read` role — this is enough to view your code and review pull requests.
 4. Click `Add <username> to this repository`.
 
-## 4. Open the Arduino firmware in PlatformIO
+## 4. 🔌 Open the Arduino firmware in PlatformIO
 
 1. In VSCode, click on the PlatformIO tab (in the left toolbar).
 2. In `Project Tasks`, click on `Pick a Folder` (you might need to scroll down). Navigate to the cloned repository, and inside it, select the folder `firmware/`.
 
-## 5. Gather your hardware
+## 5. 🧰 Gather your hardware
 
 Make sure you have the following before starting Session 1:
 
@@ -63,7 +63,7 @@ Make sure you have the following before starting Session 1:
 - LED kit.
 - Push button kit.
 
-## 6. Set up your AWS account
+## 6. ☁️ Set up your AWS account
 
 !!! warning
     The free tier of AWS lasts 6 months, and an email address can only be used once to create an AWS account. If you have an AWS account but the free tier expired, create a new one using a different address (you can create a free Gmail account if need be).

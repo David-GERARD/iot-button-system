@@ -1,3 +1,3 @@
-# Session 2 — Connectivity
+# 📶 Session 2 — Connectivity
 
 *Comming soon*

@@ -1,4 +1,4 @@
-# Mini Project — IoT Button System
+# 🔘 Mini Project — IoT Button System
 
 This tutorial walks you through building a small end-to-end IoT system: a physical button connected to an Arduino board that communicates with a cloud backend hosted on Amazon Web Services.
 
@@ -37,7 +37,7 @@ sequenceDiagram
     A->>L: LED on
 ```
 
-## Main objectives — build the backbone of an IoT cloud system
+## 🎯 Main objectives — build the backbone of an IoT cloud system
 
 * Build a complete system using an **Arduino**, MQTT, AWS IoT Core, and AWS Lambda.
 * Publish and subscribe to MQTT topics (`arduino/outgoing`, `arduino/inbound`).
@@ -47,7 +47,7 @@ sequenceDiagram
 
 These are exactly the building blocks — an edge device, connectivity, and a cloud backend — that the Smart Supermarket IoT system will be built on, just at group scale.
 
-## Secondary objectives — tools and workflow for collaborative programming
+## 🤝 Secondary objectives — tools and workflow for collaborative programming
 
 * Practice the collaborative git workflow you'll rely on as a group: feature branches, pull requests, code review, and version tags (see [Development Workflow](../development-workflow.md)).
 * Version the project using Git and GitHub.
@@ -55,7 +55,7 @@ These are exactly the building blocks — an edge device, connectivity, and a cl
 * Apply good security practices (secrets files, IAM users and roles, secure MQTT policies).
 * Structure a multi-component system clearly.
 
-## Structure of the tutorial
+## 🗺️ Structure of the tutorial
 
 !!! warning
     IoT systems mix hardware, firmware, networking, and cloud infrastructure. When something does not work, the issue could be anywhere. If you connect everything at once, debugging quickly becomes painful.
@@ -70,7 +70,7 @@ Thus, this tutorial follows a strict order:
 
 Take the tasks in order. Do not move on until the current step behaves exactly as expected. That discipline is what makes larger systems manageable.
 
-## Mini project structure
+## 📚 Mini project structure
 
 The mini project is split over three sessions. Each session has a **Lecture Notes** page covering the background you need, followed by one or more hands-on **Task** pages.
 
@@ -82,7 +82,7 @@ The mini project is split over three sessions. Each session has a **Lecture Note
 
 Before you start, follow the [Getting Started](../getting-started.md) guide to set up your tools and clone the project.
 
-## Repository structure
+## 📁 Repository structure
 
 ```text
 iot-button-system/
@@ -92,7 +92,7 @@ iot-button-system/
 └── lambdas/  # AWS Lambda function code, written in Python
 ```
 
-## Hardware requirements
+## 🧰 Hardware requirements
 
 - Arduino MKR WiFi 1010.
 - MKR Connector Carrier.

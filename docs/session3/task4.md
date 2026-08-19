@@ -1,6 +1,6 @@
-# Mini Project Task 4 — Create a System Backend Using AWS Lambda Triggered by AWS IoT Core
+# ⚡ Mini Project Task 4 — Create a System Backend Using AWS Lambda Triggered by AWS IoT Core
 
-## 4.0 — Create a branch for this task
+## 4.0 — 🌿 Create a branch for this task
 
 1. On GitHub, in **your fork**, go to the branches page and click `New branch`. Name it `task-4`, create it from `main`, and click `Create new branch`.
 2. Open your cloned repository in VSCode.
@@ -12,7 +12,7 @@
 
 All the work for this task should be committed to the `task-4` branch.
 
-## 4.1 — Create and test a cloud backend with AWS Lambda
+## 4.1 — ⚡ Create and test a cloud backend with AWS Lambda
 
 In this section, we will implement and test the backend of our application, whose event logic is described in the diagram below.
 
@@ -32,7 +32,7 @@ sequenceDiagram
     R->>I: MQTT Publish\nTopic: arduino/inbound\nPayload: { minutes }
 ```
 
-### 4.1.1 — Create and test the Lambda function `get_time`
+### 4.1.1 — 🕐 Create and test the Lambda function `get_time`
 
 1. Using the search bar, open AWS Lambda.
 2. Click on `Create function`:
@@ -51,7 +51,7 @@ sequenceDiagram
 5. Create two more test events, one for GMT+2, and one for GMT-2.
 6. Verify that the Lambda function behaves as expected.
 
-### 4.1.2 — Create and test the Lambda function `run_backend`
+### 4.1.2 — ⚙️ Create and test the Lambda function `run_backend`
 
 1. In AWS Lambda, go to functions, and create a new function:
     - Choose `Author from scratch`.
@@ -66,7 +66,7 @@ sequenceDiagram
 3. In the MQTT test client, subscribe to the topic `arduino/inbound`.
 4. Using the code in `lambdas/run_backend/handler.py`, deploy and test the function. Use the MQTT test client to verify it posts messages to the topic `arduino/inbound`.
 
-### 4.1.3 — Create and test an AWS IoT rule to trigger `run_backend`
+### 4.1.3 — 🔗 Create and test an AWS IoT rule to trigger `run_backend`
 
 1. In AWS IoT, click on `Manage` → `Message routing` → `Rules`, and click on `Create rule`.
 2. Name the rule `arduino_outgoing`.
@@ -86,7 +86,7 @@ sequenceDiagram
 6. Check that messages are posted on `arduino/inbound`.
     ![MQTT test client showing inbound messages](../images/task_4/mqtt_check.PNG)
 
-## 4.2 — Update the firmware of the edge device to test the system end-to-end
+## 4.2 — 🔄 Update the firmware of the edge device to test the system end-to-end
 
 ```mermaid
 sequenceDiagram
@@ -123,7 +123,7 @@ sequenceDiagram
 
 This time, you're on your own! If you followed this tutorial step-by-step, you have all the skills and resources needed to implement it without solutions.
 
-## 4.3 — Submit the task for review
+## 4.3 — 🔀 Submit the task for review
 
 1. Commit and push your changes to the `task-4` branch.
 2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-4`, then click `Create pull request`.

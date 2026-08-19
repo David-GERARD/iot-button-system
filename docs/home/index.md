@@ -1,12 +1,12 @@
-# Home
+# 🏠 Home
 
 Welcome to the course website for **ELEC0033** and **ELEC0152**! 
 
 ---
 
-## Course structure
+## 🗺️ Course structure
 
-### Part 1 — IoT fundamentals + Mini Project
+### 1️⃣ Part 1 — IoT fundamentals + Mini Project
 
 An IoT crash course to get you familiar with all the tools and workflows you'll need to start working on the group project.
 
@@ -29,7 +29,7 @@ Each of these three sessions is made up of a lecture followed by a guided tutori
 
 
 
-### Part 2 — Tutorials + Group Project
+### 2️⃣ Part 2 — Tutorials + Group Project
 
 Lectures covering additional material important to designing an IoT system, combined with dedicated time to work on your group project.
 
@@ -51,16 +51,16 @@ More details on this part of the course, and the [Group Project](group-project.m
 
 ---
 
-## Learning objectives
+## 🎯 Learning objectives
 
-### IoT knowledge and skills
+### 📡 IoT knowledge and skills
 
 - Wire up and program sensors and actuators on a microcontroller.
 - Understand and use connectivity protocols and APIs (WiFi, HTTP, MQTT, TLS/X.509).
 - Build and connect a cloud backend (AWS IoT Core, AWS Lambda) that processes device data and responds to it.
 - Understand the full edge → cloud → edge communication loop that underpins most real-world IoT systems.
 
-### Engineering methodology and workflows
+### 🔧 Engineering methodology and workflows
 
 - Debug a multi-component system methodically, one layer of connectivity at a time.
 - Use a professional, collaborative git workflow: feature branches, pull requests, code review, and version tags.
@@ -71,7 +71,7 @@ This course is built around **practical, hands-on skills**. The goal isn't to me
 
 ---
 
-## A note on AI use
+## 🤖 A note on AI use
 
 !!! warning "AI is allowed — but you still have to know your system"
     You're welcome to use AI tools (Copilot, ChatGPT, Claude, and similar) while working through this course. However, assessment does not stop at "does it work". You will be asked to **describe your system**, **justify your design and methodology choices**, and **walk through your approach to troubleshooting** when something breaks.

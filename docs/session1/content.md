@@ -1,3 +1,3 @@
-# Session 1 — The Edge Device
+# 📟 Session 1 — The Edge Device
 
 *Comming soon*

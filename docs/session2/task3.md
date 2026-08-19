@@ -1,9 +1,9 @@
-# Mini Project Task 3 — Connecting the Edge Device to AWS IoT Core
+# ☁️ Mini Project Task 3 — Connecting the Edge Device to AWS IoT Core
 
 !!! note
     This task assumes you already have an AWS account set up — see [Getting Started](../getting-started.md#6-set-up-your-aws-account) if you haven't done that yet.
 
-## 3.0 — Create a branch for this task
+## 3.0 — 🌿 Create a branch for this task
 
 1. On GitHub, in **your fork**, go to the branches page and click `New branch`. Name it `task-3`, create it from `main`, and click `Create new branch`.
 2. Open your cloned repository in VSCode.
@@ -15,9 +15,9 @@
 
 All the work for this task should be committed to the `task-3` branch.
 
-## 3.1 — Configure connectivity to AWS IoT Core
+## 3.1 — ⚙️ Configure connectivity to AWS IoT Core
 
-### 3.1.1 — Create a CSR for a private key generated in an ECC508/ECC608 crypto chip slot
+### 3.1.1 — 🔑 Create a CSR for a private key generated in an ECC508/ECC608 crypto chip slot
 
 AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 certificates for authentication. We'll use a sketch to generate a Certificate Signing Request (CSR) on the board and then upload this CSR in the AWS console to create an X.509 certificate.
 
@@ -52,7 +52,7 @@ AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 
     !!! danger
         Make sure to **save this file**, but do not upload it to GitHub (it is bad practice — we use secrets instead).
 
-### 3.1.2 — Create a thing in AWS IoT
+### 3.1.2 — 🏷️ Create a thing in AWS IoT
 
 1. Log into your AWS account, and using the search bar, open AWS IoT Core.
     ![AWS IoT Core console](../images/task_3/console_iot_core.PNG)
@@ -67,7 +67,7 @@ AWS IoT Core requires devices that connect using the MQTT protocol to use X.509 
 8. In the left menu bar, click on `Test` → `MQTT test client`. Click on the dropdown menu `Connection details`, and copy the AWS IoT broker Endpoint URL.
     ![MQTT broker endpoint URL](../images/task_3/mqtt_endpoint_url.PNG)
 
-## 3.2 — Update the firmware of the edge device to test connectivity to AWS IoT Core
+## 3.2 — 🔄 Update the firmware of the edge device to test connectivity to AWS IoT Core
 
 ```mermaid
 sequenceDiagram
@@ -151,7 +151,7 @@ sequenceDiagram
     - The LED behaves as expected and blinks 3 times to indicate a successful connection.
     - You see a message appear in the MQTT test client every time you press the button.
 
-## 3.3 — Submit the task for review
+## 3.3 — 🔀 Submit the task for review
 
 1. Commit and push your changes to the `task-3` branch.
 2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-3`, then click `Create pull request`.
@@ -159,7 +159,7 @@ sequenceDiagram
 4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
 5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v3.0.0`, and click `Create new tag: v3.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
-## Solutions for Task 3
+## 💡 Solutions for Task 3
 
 `firmware/platformio.ini`
 

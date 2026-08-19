@@ -1,9 +1,9 @@
-# Mini Project Task 1 — Building and Testing the Edge Device
+# 🔧 Mini Project Task 1 — Building and Testing the Edge Device
 
 !!! note
     Before starting, make sure you have completed the [Getting Started](../getting-started.md) guide (IDE setup, forking, cloning, adding a course educator as a collaborator, and opening `firmware/` in PlatformIO).
 
-## 1.0 — Create a branch for this task
+## 1.0 — 🌿 Create a branch for this task
 
 1. On GitHub, in **your fork**, go to the branches page and click `New branch`. Name it `task-1`, create it from `main`, and click `Create new branch`.
 2. Open your cloned repository in VSCode.
@@ -15,7 +15,7 @@
 
 All the work for this task should be committed to the `task-1` branch.
 
-## 1.1 — Building the edge device
+## 1.1 — 🔨 Building the edge device
 
 1. Connect the Arduino MKR WiFi 1010 to the MKR Connector Carrier.
 2. Connect the LED module to port D3 of the MKR Connector Carrier.
@@ -25,7 +25,7 @@ All the work for this task should be committed to the `task-1` branch.
     Make sure to correctly orient the connectors.
     ![Arduino wiring](../images/task_1/arduino.png)
 
-## 1.2 — Write and upload the firmware to the edge device
+## 1.2 — ⬆️ Write and upload the firmware to the edge device
 
 Event logic implemented in task 1:
 
@@ -61,7 +61,7 @@ sequenceDiagram
 4. In the PlatformIO tab, in `general`, click on `Build`. Check the terminal for errors.
 5. In the PlatformIO tab, in `general`, click on `Upload and Monitor`.
 
-## 1.3 — Test the edge device
+## 1.3 — ✅ Test the edge device
 
 Verify the following:
 
@@ -69,7 +69,7 @@ Verify the following:
 2. When pressing the button, the LED turns off and stays off.
 3. When entering an integer in the serial monitor, the LED blinks (3 times if you entered 3...), and then turns back on.
 
-## 1.4 — Submit the task for review
+## 1.4 — 🔀 Submit the task for review
 
 1. Commit and push your changes to the `task-1` branch.
 2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-1`, then click `Create pull request`.
@@ -77,7 +77,7 @@ Verify the following:
 4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
 5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v1.0.0`, and click `Create new tag: v1.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
-## Solutions for Task 1
+## 💡 Solutions for Task 1
 
 `firmware/src/main.cpp`:
 

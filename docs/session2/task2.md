@@ -1,6 +1,6 @@
-# Mini Project Task 2 — Connecting the Edge Device to the Internet
+# 🌐 Mini Project Task 2 — Connecting the Edge Device to the Internet
 
-## 2.0 — Create a branch for this task
+## 2.0 — 🌿 Create a branch for this task
 
 1. On GitHub, in **your fork**, go to the branches page and click `New branch`. Name it `task-2`, create it from `main`, and click `Create new branch`.
 2. Open your cloned repository in VSCode.
@@ -12,7 +12,7 @@
 
 All the work for this task should be committed to the `task-2` branch.
 
-## 2.1 — Create a secret file to store your WiFi network name and password
+## 2.1 — 🔐 Create a secret file to store your WiFi network name and password
 
 !!! note
     Sensitive information (WiFi passwords, API keys, AWS certificates, private keys) should never be stored directly in source code. Keeping these "secrets" in separate, non-tracked files prevents them from being accidentally committed to GitHub, shared publicly, or leaked to others. It also makes the project safer to distribute, easier to reuse across different environments, and simpler to rotate or update credentials without modifying the code itself.
@@ -27,7 +27,7 @@ All the work for this task should be committed to the `task-2` branch.
 
 3. Save the file.
 
-## 2.2 — Update the firmware to connect to your WiFi router
+## 2.2 — 📶 Update the firmware to connect to your WiFi router
 
 !!! tip
     Use the [documentation](https://docs.arduino.cc/libraries/wifinina/) of the WiFiNINA library to find out how to implement the following items.
@@ -38,7 +38,7 @@ All the work for this task should be committed to the `task-2` branch.
 4. Build the code and fix any errors that may arise.
 5. Upload the code to the Arduino and open the Serial monitor to check that it connects to the WiFi.
 
-## 2.3 — Upload the firmware and test Internet connectivity
+## 2.3 — ✅ Upload the firmware and test Internet connectivity
 
 At this stage, your board connects to your WiFi router.
 
@@ -85,7 +85,7 @@ sequenceDiagram
 2. Build the code and fix any errors that may arise.
 3. Upload the code to the Arduino and open the Serial monitor to check that it connects to the WiFi, then press the button and check that it successfully connects to `httpbin.org`.
 
-## 2.4 — Submit the task for review
+## 2.4 — 🔀 Submit the task for review
 
 1. Commit and push your changes to the `task-2` branch.
 2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-2`, then click `Create pull request`.
@@ -93,7 +93,7 @@ sequenceDiagram
 4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
 5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v2.0.0`, and click `Create new tag: v2.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
-## Solutions for Task 2
+## 💡 Solutions for Task 2
 
 `firmware/platformio.ini`
 
