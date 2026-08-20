@@ -9,8 +9,22 @@
     ```bash
     git checkout task-4
     ```
+5. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-4`. The description box will be pre-filled from the [pull request template](https://github.com/David-GERARD/iot-button-system/blob/main/.github/PULL_REQUEST_TEMPLATE.md) — skim it now, you'll fill it in as you go.
+6. Click the dropdown arrow on the `Create pull request` button and choose `Create draft pull request` instead.
 
 All the work for this task should be committed to the `task-4` branch.
+
+### What to put in the pull request description
+
+- **Title:** `Task 4 — Create a system backend using AWS Lambda triggered by AWS IoT Core`
+- **Feature purpose:** Close the loop — add the cloud-side logic that reacts to the device's message and sends back something meaningful, completing the edge → cloud → edge pipeline.
+- **Feature architecture:** An IoT Rule on `arduino/outgoing` triggers the `run_backend` Lambda, which calls the `get_time` Lambda and publishes the result to `arduino/inbound`; the edge device subscribes to `arduino/inbound` and blinks the LED accordingly.
+- **Feature interfaces:** Lambda-to-Lambda invocation (`run_backend` → `get_time`); the IAM role/policy scoping `run_backend`'s permissions; the MQTT topics `arduino/outgoing` (in) and `arduino/inbound` (out).
+- **Test plan:** MQTT test client publishing test payloads to `arduino/outgoing` and checking `arduino/inbound` (see 4.1.3); then an end-to-end test by pressing the physical button (see 4.2).
+- **Implementation roadmap:** e.g. deploy & test `get_time` → deploy & test `run_backend` with its IAM role → create the IoT rule → update the firmware to subscribe/publish and blink → verify end-to-end.
+
+!!! note
+    As with the earlier tasks, this breakdown is scaffolding to show you what feature planning looks like — but this time you're implementing it without a step-by-step solution, which is the closest this mini project gets to the group project. There, nobody hands you the purpose, architecture, interfaces, and test plan up front: working those out yourselves *is* the planning work.
 
 ## 4.1 — ⚡ Create and test a cloud backend with AWS Lambda
 
@@ -125,10 +139,11 @@ This time, you're on your own! If you followed this tutorial step-by-step, you h
 
 ## 4.3 — 🔀 Submit the task for review
 
-1. Commit and push your changes to the `task-4` branch.
-2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-4`, then click `Create pull request`.
-3. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (in the pull request page, click the gear icon next to `Reviewers`).
-4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
-5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v4.0.0`, and click `Create new tag: v4.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
+1. Commit and push your changes to the `task-4` branch — they show up automatically in your draft pull request.
+2. Finish filling in the pull request description from the template (purpose, architecture, interfaces, test plan, roadmap).
+3. On the pull request page, click `Ready for review` to take it out of draft.
+4. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (click the gear icon next to `Reviewers`).
+5. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
+6. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v4.0.0`, and click `Create new tag: v4.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
 Congratulations — you've built the complete end-to-end system!

@@ -9,8 +9,22 @@
     ```bash
     git checkout task-2
     ```
+5. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-2`. The description box will be pre-filled from the [pull request template](https://github.com/David-GERARD/iot-button-system/blob/main/.github/PULL_REQUEST_TEMPLATE.md) — skim it now, you'll fill it in as you go.
+6. Click the dropdown arrow on the `Create pull request` button and choose `Create draft pull request` instead.
 
 All the work for this task should be committed to the `task-2` branch.
+
+### What to put in the pull request description
+
+- **Title:** `Task 2 — Connecting the edge device to the internet`
+- **Feature purpose:** Get the device onto the Internet and prove it, rather than assuming it — joining a WiFi network only means it reached the local router, not that it can reach the outside world.
+- **Feature architecture:** `setup()` connects to WiFi via `WiFi.begin()`/`WiFi.status()` using credentials from `secrets.h`. `handShakeProtocol()` now uses this task's reset trigger: a `WiFiClient` connection attempt to an external server (`httpbin.org`), replacing the Serial Monitor input from Task 1.
+- **Feature interfaces:** The local WiFi network (SSID/password read from `secrets.h`); a TCP connection to `httpbin.org` on port 80.
+- **Test plan:** Serial Monitor shows "WiFi connected" on boot; pressing the button blinks the LED 3 times on a successful `httpbin.org` connection, 9 times on failure (see 2.3).
+- **Implementation roadmap:** e.g. create `secrets.h` with WiFi credentials → connect to WiFi in `setup()` → implement the `WiFiClient` handshake → build & upload → manually verify against 2.3.
+
+!!! note
+    As with Task 1, this breakdown is scaffolding to show you what feature planning looks like. For your group project, you'll be doing this planning yourselves — nobody hands you the purpose, architecture, interfaces, and test plan up front.
 
 ## 2.1 — 🔐 Create a secret file to store your WiFi network name and password
 
@@ -87,11 +101,12 @@ sequenceDiagram
 
 ## 2.4 — 🔀 Submit the task for review
 
-1. Commit and push your changes to the `task-2` branch.
-2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-2`, then click `Create pull request`.
-3. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (in the pull request page, click the gear icon next to `Reviewers`).
-4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
-5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v2.0.0`, and click `Create new tag: v2.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
+1. Commit and push your changes to the `task-2` branch — they show up automatically in your draft pull request.
+2. Finish filling in the pull request description from the template (purpose, architecture, interfaces, test plan, roadmap).
+3. On the pull request page, click `Ready for review` to take it out of draft.
+4. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (click the gear icon next to `Reviewers`).
+5. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
+6. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v2.0.0`, and click `Create new tag: v2.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
 ## 💡 Solutions for Task 2
 

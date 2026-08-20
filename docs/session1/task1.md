@@ -12,8 +12,22 @@
     ```bash
     git checkout task-1
     ```
+5. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-1`. The description box will be pre-filled from the [pull request template](https://github.com/David-GERARD/iot-button-system/blob/main/.github/PULL_REQUEST_TEMPLATE.md) — skim it now, you'll fill it in as you go.
+6. Click the dropdown arrow on the `Create pull request` button and choose `Create draft pull request` instead.
 
 All the work for this task should be committed to the `task-1` branch.
+
+### What to put in the pull request description
+
+- **Title:** `Task 1 — Building and testing the edge device`
+- **Feature purpose:** Build the edge device's core sense/actuate loop — read the push button, drive the LED — and verify it with a simple serial "reset" handshake, the same pattern every later task will reuse with a different reset trigger.
+- **Feature architecture:** An Arduino MKR WiFi 1010 wired to a push button (pin D2, input) and an LED (pin D3, output). `loop()` polls the button; once pressed, `handShakeProtocol()` blocks until it receives a reset signal — here, an integer typed into the Serial Monitor — then blinks the LED that many times before turning it back on.
+- **Feature interfaces:** Digital I/O pins D2 (button) and D3 (LED); the Serial Monitor over USB, standing in for the network/cloud acknowledgement used in later tasks.
+- **Test plan:** Manual hardware test — confirm the LED is on by default, turns off on button press, and blinks N times then turns back on when N is entered in the Serial Monitor (see 1.3).
+- **Implementation roadmap:** e.g. wire the hardware → implement `handShakeProtocol()` → build & upload → manually verify against 1.3.
+
+!!! note
+    For this mini project, we're giving you this breakdown to get you familiar with what "planning a feature" looks like before you touch any code. For your group project, nobody will hand you this plan — working out the purpose, architecture, interfaces, and test plan for each feature *is* part of the planning work you'll be doing yourselves.
 
 ## 1.1 — 🔨 Building the edge device
 
@@ -71,11 +85,12 @@ Verify the following:
 
 ## 1.4 — 🔀 Submit the task for review
 
-1. Commit and push your changes to the `task-1` branch.
-2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-1`, then click `Create pull request`.
-3. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (in the pull request page, click the gear icon next to `Reviewers`).
-4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
-5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v1.0.0`, and click `Create new tag: v1.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
+1. Commit and push your changes to the `task-1` branch — they show up automatically in your draft pull request.
+2. Finish filling in the pull request description from the template (purpose, architecture, interfaces, test plan, roadmap).
+3. On the pull request page, click `Ready for review` to take it out of draft.
+4. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (click the gear icon next to `Reviewers`).
+5. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
+6. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v1.0.0`, and click `Create new tag: v1.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
 ## 💡 Solutions for Task 1
 

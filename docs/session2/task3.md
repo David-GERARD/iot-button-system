@@ -12,8 +12,22 @@
     ```bash
     git checkout task-3
     ```
+5. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-3`. The description box will be pre-filled from the [pull request template](https://github.com/David-GERARD/iot-button-system/blob/main/.github/PULL_REQUEST_TEMPLATE.md) — skim it now, you'll fill it in as you go.
+6. Click the dropdown arrow on the `Create pull request` button and choose `Create draft pull request` instead.
 
 All the work for this task should be committed to the `task-3` branch.
+
+### What to put in the pull request description
+
+- **Title:** `Task 3 — Connecting the edge device to AWS IoT Core`
+- **Feature purpose:** Authenticate the device to AWS IoT Core and prove it can exchange messages over a secure MQTT connection — the transport the rest of the system will run on.
+- **Feature architecture:** A private key generated and held in the board's ECC508/608 crypto chip; a CSR signed by AWS IoT Core to produce an X.509 certificate, embedded in `secrets.h`. `handShakeProtocol()`'s reset trigger becomes a TLS MQTT connection (via `ArduinoBearSSL` + `ArduinoMqttClient`) to the AWS IoT broker, publishing a test message on success.
+- **Feature interfaces:** The AWS IoT Core MQTT broker over TLS (port 8883); the `arduino/outgoing` topic; the `FirstPolicy` IoT policy scoping what the device's certificate is allowed to do.
+- **Test plan:** MQTT test client subscribed to `arduino/outgoing`; pressing the button blinks the LED 3 times and a message appears in the test client on a successful connection, 9 times on failure (see 3.2, step 6).
+- **Implementation roadmap:** e.g. generate the CSR → create the AWS IoT thing, certificate, and policy → add the broker URL and certificate to `secrets.h` → implement the MQTT handshake → build & upload → verify via the MQTT test client.
+
+!!! note
+    As with the earlier tasks, this breakdown is scaffolding to show you what feature planning looks like. For your group project, you'll be doing this planning yourselves — nobody hands you the purpose, architecture, interfaces, and test plan up front.
 
 ## 3.1 — ⚙️ Configure connectivity to AWS IoT Core
 
@@ -153,11 +167,12 @@ sequenceDiagram
 
 ## 3.3 — 🔀 Submit the task for review
 
-1. Commit and push your changes to the `task-3` branch.
-2. On GitHub, in **your fork**, click on `Pull requests` → `New pull request`. Set `base: main` and `compare: task-3`, then click `Create pull request`.
-3. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (in the pull request page, click the gear icon next to `Reviewers`).
-4. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
-5. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v3.0.0`, and click `Create new tag: v3.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
+1. Commit and push your changes to the `task-3` branch — they show up automatically in your draft pull request.
+2. Finish filling in the pull request description from the template (purpose, architecture, interfaces, test plan, roadmap).
+3. On the pull request page, click `Ready for review` to take it out of draft.
+4. Request a review from the course educator you added as a collaborator in [Getting Started](../getting-started.md#3-add-a-course-educator-as-a-collaborator) (click the gear icon next to `Reviewers`).
+5. Once the pull request is approved, click `Merge pull request` → `Confirm merge`.
+6. On GitHub, in **your fork**, click on `Releases` (in the right sidebar of the repository home page) → `Create a new release`. Click `Choose a tag`, type `v3.0.0`, and click `Create new tag: v3.0.0 on publish`. Make sure `Target` is set to `main`, then click `Publish release`.
 
 ## 💡 Solutions for Task 3
 
