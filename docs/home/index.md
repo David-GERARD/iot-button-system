@@ -13,9 +13,9 @@ An IoT crash course to get you familiar with all the tools and workflows you'll 
 ```mermaid
 timeline
     section Part 1 — IoT Fundamentals + Mini Project
-        Session 1 : Sensors and Arduino : Task 1 — Building and testing the edge device
-        Session 2 : Connectivity, protocols, and APIs : Task 2 — Connecting the edge device to the internet : Task 3 — Connecting the edge device to AWS IoT Core
-        Session 3 : Cloud : Task 4 — Building the system backend with AWS Lambda
+        Session 1 : Lecture — Sensors and Arduino : Task 1 — Building and testing the edge device
+        Session 2 : Lecture — Connectivity, protocols, and APIs : Task 2 — Connecting the edge device to the internet : Task 3 — Connecting the edge device to AWS IoT Core
+        Session 3 : Lecture — Cloud : Task 4 — Building the system backend with AWS Lambda
 ```
 
 - **Session 1 — [Sensors and Arduino](../session1/content.md)**
@@ -31,23 +31,26 @@ Each of these three sessions is made up of a lecture followed by a guided tutori
 
 ### 2️⃣ Part 2 — Tutorials + Group Project
 
-Lectures covering additional material important to designing an IoT system, combined with dedicated time to work on your group project.
+Lectures covering additional material important to designing an IoT system, combined with dedicated time to work on your [Group Project](group-project.md) — split into a Planification phase and a Prototyping phase.
 
 ```mermaid
 timeline
-    section Part 2 — Tutorials + Group Project
-        Session 4 : Project brief : Business case : Team building
-        Session 5 : Exploratory Data Analysis : Ethics
-        Session 6 : Q&A with a cloud engineer
-        Session 7 : TBD
+        section Phase 1 — Planification
+            Session 4 : Lecture — Project brief : Lecture — Business case : Team building
+            Session 5 : Lecture — Exploratory Data Analysis : Lecture — Ethics 
+        section Phase 2 — Prototyping
+            Session 6 :  🚨 Planning report due : Lecture — Q&A with a cloud engineer
+            Session 7 : Prototyping
+            Session 8 : 🚨 Demonstration due
 ```
 
 - **Session 4 — Project brief, Business case, Team building**
 - **Session 5 — Exploratory Data Analysis, Ethics**
-- **Session 6 — Q&A with a cloud engineer**
-- **Session 7 — TBD**
+- **Session 6 — Q&A with a cloud engineer** — 📄 the [planning report](group-project.md) is due before this session
+- **Session 7 — Prototyping**
+- **Session 8 — 🎬 [Demonstration](group-project.md)**
 
-More details on this part of the course, and the [Group Project](group-project.md) itself, will be added here in due course.
+See the [Group Project](group-project.md) page for the full brief, requirements, and marking schemes for each phase.
 
 ---
 
