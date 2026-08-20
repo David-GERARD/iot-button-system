@@ -15,7 +15,7 @@ timeline
     section Part 1 — IoT Fundamentals + Mini Project
         Session 1 : Lecture — Sensors and Arduino : Task 1 — Building and testing the edge device
         Session 2 : Lecture — Connectivity, protocols, and APIs : Task 2 — Connecting the edge device to the internet : Task 3 — Connecting the edge device to AWS IoT Core
-        Session 3 : Lecture — Cloud : Task 4 — Building the system backend with AWS Lambda
+        Session 3 : Lecture — Cloud : Task 4 — Building the system backend with AWS Lambda : Task 5 — Creating a dashboard on AWS
 ```
 
 - **Session 1 — [Sensors and Arduino](../session1/content.md)**

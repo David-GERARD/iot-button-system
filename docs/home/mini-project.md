@@ -67,6 +67,7 @@ Thus, this tutorial follows a strict order:
 3. Make it connect to the Internet.
 4. Make it talk to AWS.
 5. Add backend logic in the cloud.
+6. Visualize the data on a dashboard.
 
 Take the tasks in order. Do not move on until the current step behaves exactly as expected. That discipline is what makes larger systems manageable.
 
@@ -78,9 +79,18 @@ The mini project is split over three sessions. Each session has a **Lecture Note
 |---------|---------------|-------|
 | [Session 1](../session1/content.md) | Embedded systems, firmware, and PlatformIO | [Task 1 — Building and testing the edge device](../session1/task1.md) |
 | [Session 2](../session2/content.md) | Networking, MQTT, and AWS IoT Core | [Task 2 — Connecting the edge device to the internet](../session2/task2.md), [Task 3 — Connecting the edge device to AWS IoT Core](../session2/task3.md) |
-| [Session 3](../session3/content.md) | Serverless backends with AWS Lambda | [Task 4 — Building the system backend with AWS Lambda](../session3/task4.md) |
+| [Session 3](../session3/content.md) | Serverless backends with AWS Lambda | [Task 4 — Building the system backend with AWS Lambda](../session3/task4.md), [Task 5 — Creating a dashboard on AWS](../session3/task5.md) |
 
 Before you start, follow the [Getting Started](../getting-started.md) guide to set up your tools and clone the project.
+
+## 🏅 Grading
+
+Having each pull request marked `Ready for review` **on time** is worth **10% of your mini project grade — 2% per task** (5 tasks × 2%).
+
+A review does not require your implementation to work — it just requires that you asked for one in time. A review can either:
+
+- confirm that your implementation works as expected, or
+- explain that it doesn't, while providing enough information to help you troubleshoot it.
 
 ## 📁 Repository structure
 

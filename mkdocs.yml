@@ -52,6 +52,7 @@ nav:
   - Session 3:
       - Lecture Notes: session3/content.md
       - "Mini Project Task 4": session3/task4.md
+      - "Mini Project Task 5": session3/task5.md
 
 markdown_extensions:
   - admonition
