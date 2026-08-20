@@ -4,6 +4,19 @@ Welcome to the course website for **ELEC0033** and **ELEC0152**!
 
 ---
 
+## 🏅 Course assessment
+
+| Component | Weight |
+|-----------|--------|
+| [Mini Project](mini-project.md) pull requests ready in time *(individual)* | 10% |
+| [Group Project](group-project.md) planning report *(15% group + 15% individual)* | 30% |
+| [Group Project](group-project.md) demonstration *(group)* | 30% |
+| [Group Project](group-project.md) report *(group)* | 30% |
+
+See the [Mini Project](mini-project.md) and [Group Project](group-project.md) pages for the detailed marking schemes behind each of these.
+
+---
+
 ## 🗺️ Course structure
 
 ### 1️⃣ Part 1 — IoT fundamentals + Mini Project
@@ -52,16 +65,7 @@ timeline
 
 See the [Group Project](group-project.md) page for the full brief, requirements, and marking schemes for each phase.
 
-### 🏅 Course grading
 
-| Component | Weight |
-|-----------|--------|
-| [Mini Project](mini-project.md) pull requests ready in time *(individual)* | 10% |
-| [Group Project](group-project.md) planning report *(15% group + 15% individual)* | 30% |
-| [Group Project](group-project.md) demonstration *(group)* | 30% |
-| [Group Project](group-project.md) report *(group)* | 30% |
-
-See the [Mini Project](mini-project.md) and [Group Project](group-project.md) pages for the detailed marking schemes behind each of these.
 
 ---
 
