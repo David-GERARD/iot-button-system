@@ -1,6 +1,6 @@
 # 🏠 Home
 
-Welcome to the course website for **ELEC0033** and **ELEC0152**! 
+Welcome to the course website for **ELEC0033** and **ELEC0130**! 
 
 ---
 
